@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">TodoApp</string>
+    <string name="app_name">SA Todo App</string>
+    <string name="login_title">Fill free to login here. We will not share your data with others!</string>
+    <string name="login_with_gmail">Login with Gmail</string>
+    <string name="add_task_heading">Add New task</string>
+    <string name="add_task_sub_heading">Tackale your goals in daily doses</string>
+    <string name="add_category">Select Category</string>
+    <string name="add_new">Create New</string>
+    <string name="save_task">Save Task</string>
+    <string name="category_warning">Please select a category or create new one.</string>
+    <string name="fill_all_data_warning">Please fill all the data.</string>
+    <string name="upadte_task">Update Task</string>
+    <string name="check_your_internet_connection">Check your internet connection.</string>
 </resources>
