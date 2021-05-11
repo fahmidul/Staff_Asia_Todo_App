@@ -64,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
         } else {
 
 
-
             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             firebaseUserId = firebaseUser.getUid();
             init();
@@ -161,10 +160,21 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //getting unique user id
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            firebaseUserId = firebaseUser.getUid();
+            loadTodoList();
+
+        }
+    }
+
+    public void loadTodoList() {
         firebaseFirestore.collection("todos").whereEqualTo("id", firebaseUserId).get()
                 .addOnCompleteListener(HomeActivity.this, new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                         todoArrayList.clear();
                         for (DocumentSnapshot doc : task.getResult()) {
                             Todo todo = doc.toObject(Todo.class);
