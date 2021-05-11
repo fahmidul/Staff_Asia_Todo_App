@@ -56,13 +56,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         firebaseFirestore = FirebaseFirestore.getInstance();
-        Log.d(TAG, "in Home Activity");
+
         if (firebaseAuth.getCurrentUser() == null) {
-            Log.d(TAG, "auth.getCurrentUser() is null");
+
             startActivity(new Intent(this, LoginActivity.class));
 
         } else {
-            Log.d(TAG, "auth.getCurrentUser() is not null");
+
 
 
             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

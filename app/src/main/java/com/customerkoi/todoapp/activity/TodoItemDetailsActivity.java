@@ -18,10 +18,11 @@ public class TodoItemDetailsActivity extends AppCompatActivity {
     TextView tvStatus, tvTitle, tvDescription, tvCategory;
     String title, description, category, status;
     public static String TAG = "firebase_todo_app";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "in TodoItemDetailsActivity");
+
         setContentView(R.layout.activity_todo_items_details);
         title = getIntent().getStringExtra("title");
         description = getIntent().getStringExtra("description");
@@ -44,14 +45,14 @@ public class TodoItemDetailsActivity extends AppCompatActivity {
         tvCategory = (TextView) findViewById(R.id.tvCategory);
 
 
-        tvTitle.setText(title);
-        tvDescription.setText(description);
-        tvCategory.setText(category);
+        tvTitle.setText("Title: " + title);
+        tvDescription.setText("Description: " + description);
+        tvCategory.setText("Category: " + category);
 
         if (status.equals("1")) {
             tvStatus.setText("Task Status: " + "Completed");
             tvStatus.setTextColor(getResources().getColor(R.color.colorPrimary));
-        }else {
+        } else {
             tvStatus.setText("Task Status: " + "Pending");
             tvStatus.setTextColor(getResources().getColor(R.color.red));
         }

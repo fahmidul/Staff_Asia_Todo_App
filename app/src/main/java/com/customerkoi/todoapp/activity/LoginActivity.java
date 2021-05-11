@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin_activity);
-        Log.d(TAG, "in LoginActivity");
+
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,10 +66,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (InternetChecker.isNetworkAvailable(getApplicationContext())) {
                     if (auth.getCurrentUser() == null) {
-                        Log.d(TAG, "auth.getCurrentUser() is null");
+
                         signIn();
                     } else {
-                        Log.d(TAG, "auth.getCurrentUser() is not null");
+
                         launchActivity(auth.getCurrentUser());
                     }
                 }else {
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signIn() {
-        Log.d("fasf", "signIn() called");
+
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN );
     }
@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+
                             FirebaseUser user = auth.getCurrentUser();
 
 //                            dbRef.child(user.getUid()).child("tasks")

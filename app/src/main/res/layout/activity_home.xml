@@ -44,9 +44,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             android:elevation="6dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/outline_add_black_48"
             app:fabSize="normal"
-
             app:pressedTranslationZ="12dp" />
 
 

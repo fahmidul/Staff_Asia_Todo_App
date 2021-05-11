@@ -54,7 +54,7 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_todo_item);
-        Log.d(TAG, "in TodoItemAddingActivity");
+
         editableTaskId = getIntent().getStringExtra("id");
         editableTaskTitle = getIntent().getStringExtra("title");
         editableTaskDescription = getIntent().getStringExtra("description");
@@ -107,7 +107,7 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
             }
         }
 
-        Log.d("ffsfafa", "-1");
+
 
         findViewById(R.id.tvAddNew).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,16 +118,15 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
                 cdd.show();
             }
         });
-        getSpinnerData();
+
 
 
         tvSaveTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ffsfafa", "0");
+
                 if (!edtTaskTitle.getText().toString().equals("") && !edtDescription.getText().toString().equals("")) {
 
-                    Log.d("ffsfafa", "1");
                     if (!ValidateHelper.validateStringData(selectedCategoryId).equals("") || !ValidateHelper.validateStringData(selectedCategoryName).equals("")) {
                         FirebaseUser testUser = FirebaseAuth.getInstance().getCurrentUser(); //getting the current logged in users id
                         String userUid = testUser.getUid();
@@ -138,7 +137,6 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
                         toDo.put("category_id", selectedCategoryId);
                         toDo.put("category_name", selectedCategoryName);
                         toDo.put("status", status);
-                        Log.d("ffsfafa", "2");
                         if (editableTaskId == null) {
                             firebaseFirestore.collection("todos").document().set(toDo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -148,7 +146,7 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
                                 }
                             });
                         } else {
-                            Log.d("ffsfafa", "3");
+
                             firebaseFirestore.collection("todos").document(editableTaskId).set(toDo).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -175,6 +173,12 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getSpinnerData();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -198,7 +202,7 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
     }
 
     public void getSpinnerData() {
-        Log.d("sffsasdar", "called");
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String userUid = user.getUid();//getting unique user id
@@ -206,18 +210,18 @@ public class TodoItemAddingActivity extends AppCompatActivity implements Adapter
                 .addOnCompleteListener(this, new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        Log.d("sffsasdar", "called1");
+
                         categoryLists.clear();
                         for (DocumentSnapshot doc : task.getResult()) {
-                            Log.d("sffsasdar", "called3");
+
                             Category category = doc.toObject(Category.class);
                             category.setId(doc.getId());
                             categoryLists.add(category);
-                            Log.d("sffsasdar", "called4");
+
 
                         }
 
-                        Log.d("sffsasdar", "called5:" + categoryLists.size());
+
                         CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), categoryLists);
                         spinnerCategory.setAdapter(customAdapter);
                     }
